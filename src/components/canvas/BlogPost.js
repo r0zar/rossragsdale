@@ -30,7 +30,7 @@ const BlogPostComponent = () => {
           textAlign='center'
           maxWidth={2.5}
           position={[0, 0, 0.03]}
-          color='#272727'
+          color='#575757'
           fontSize={0.18}
           onClick={() => {
             router.push(post.url)
@@ -42,7 +42,7 @@ const BlogPostComponent = () => {
           maxWidth={2.5}
           textAlign='center'
           position={[0, -0.6, 0]}
-          color='#272727'
+          color='#373737'
           fontSize={0.1}
         >
           {post.excerpt}

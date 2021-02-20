@@ -25,9 +25,6 @@ const Dom = ({ dom }) => {
       <p className='absolute w-full text-xs tracking-wider text-center text-white text-gray-100 md:mt-72 mt-36 top-1/2 sm:subpixel-antialiased md:antialiased'>
         I build engaging, performant, full-stack web apps.
       </p>
-      <div className='absolute bottom-4 right-4 z-index-30'>
-        <Badge />
-      </div>
     </div>
   )
 }
