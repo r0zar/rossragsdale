@@ -10,7 +10,7 @@ const Sphere = dynamic(() => import('@/components/canvas/Sphere'), {
 })
 
 const Page = () => {
-  useStore.setState({ title: 'Blog Post' })
+  useStore.setState({ title: 'rossragsdale.com' })
   return (
     <>
       <Sphere r3f />

@@ -33,7 +33,6 @@
     "@pmndrs/branding": "^0.0.7",
     "@react-spring/three": "^9.0.0-rc.3",
     "@react-three/drei": "^3.8.6",
-    "@react-three/flex": "^0.5.2",
     "@react-three/postprocessing": "^1.5.1",
     "@tryghost/content-api": "^1.4.14",
     "lerp": "^1.0.3",
