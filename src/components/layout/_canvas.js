@@ -32,7 +32,7 @@ const LCanvas = ({ children }) => {
       {/* <MaterialEditor /> */}
       {/* <EffectComposer ref={useEditorComposer()}> */}
       <EffectComposer>
-        <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        <Vignette eskil={false} offset={0.2} darkness={1.1} />
       </EffectComposer>
       {children}
     </Canvas>
