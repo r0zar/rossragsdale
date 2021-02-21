@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const title = `Hi, I'm Ross`
+const title = `rossragsdale.com`
 const url = 'https://rossragsdale.com'
 const description = 'Welcome to my site'
 const author = 'Ross Ragsdale'
@@ -74,7 +74,7 @@ const Header = () => {
       Twitter Summary card
         documentation: https://dev.twitter.com/cards/getting-started
         Be sure validate your Twitter card markup on the documentation site. */}
-        <meta name='twitter:card' content='Nice to meetcha!' />
+        <meta name='twitter:card' content="Hey, I'm Ross." />
         <meta name='twitter:site' content='@lordrozar' />
       </Head>
     </>
