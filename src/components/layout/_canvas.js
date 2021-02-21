@@ -4,7 +4,7 @@ import useStore from '@/helpers/store'
 import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
 import { animated, useSpring } from '@react-spring/three'
 import { EffectComposer, Vignette } from '@react-three/postprocessing'
-import { useControls } from 'leva'
+import { Leva, useControls } from 'leva'
 
 // enable shader editor
 // import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
@@ -28,6 +28,7 @@ const LCanvas = ({ children }) => {
       }}
     >
       {/* <OrbitControls /> */}
+      <Leva hidden={true} />
       <SelectionControls />
       <Preload all />
       <Bg />
