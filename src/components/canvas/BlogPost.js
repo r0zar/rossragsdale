@@ -2,6 +2,8 @@ import { Suspense, useEffect, useState } from 'react'
 import { Environment, Text } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import GhostContentAPI from '@tryghost/content-api'
+import { useControls } from 'leva'
+
 const api = new GhostContentAPI({
   url: 'https://blog.rossragsdale.com',
   key: 'b17cb2756c8fc3ec3c0e718842',
@@ -21,14 +23,19 @@ const BlogPostComponent = () => {
       })
   }, [])
   const router = useStore((s) => s.router)
+  const mesh = useControls('Blog Post', {
+    position: [0, 0.28, 1.15],
+    rotation: [0, 0.005, 0],
+    maxWidth: 2.5,
+  })
   return (
     <Suspense fallback={null}>
       <ambientLight intensity={0.4} />
-      <mesh position={[0, 0.28, 1.15]} rotation={[0, 0.005, 0]}>
+      <mesh position={mesh.position} rotation={mesh.rotation}>
         <Text
           depthOffset={1}
           textAlign='center'
-          maxWidth={2.5}
+          maxWidth={mesh.maxWidth}
           position={[0, 0, 0.03]}
           color='#575757'
           fontSize={0.18}
@@ -39,7 +46,7 @@ const BlogPostComponent = () => {
           {post.title}
         </Text>
         <Text
-          maxWidth={2.5}
+          maxWidth={mesh.maxWidth}
           textAlign='center'
           position={[0, -0.6, 0]}
           color='#373737'

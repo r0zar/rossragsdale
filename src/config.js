@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const title = 'rossragsdale.com'
+const title = `Hi, I'm Ross`
 const url = 'https://rossragsdale.com'
 const description = 'Welcome to my site'
 const author = 'Ross Ragsdale'
