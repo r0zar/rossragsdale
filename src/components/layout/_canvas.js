@@ -3,7 +3,13 @@ import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
 import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
 import { animated, useSpring } from '@react-spring/three'
-import { EffectComposer, Glitch, Vignette } from '@react-three/postprocessing'
+import {
+  Bloom,
+  EffectComposer,
+  Glitch,
+  Noise,
+  Vignette,
+} from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
 
 // enable shader editor
@@ -23,6 +29,13 @@ const LCanvas = ({ children }) => {
         position: 'absolute',
         top: 0,
       }}
+      gl={{
+        powerPreference: 'high-performance',
+        alpha: false,
+        antialias: false,
+        stencil: false,
+        depth: false,
+      }}
       pixelRatio={[1, 2]}
       onCreated={({ events }) => {
         useStore.setState({ events })
@@ -40,11 +53,18 @@ const LCanvas = ({ children }) => {
       <EffectComposer>
         {/* <Noise opacity={0.04} /> */}
         <Glitch
-          delay={[2, 8]} // min and max glitch delay
+          delay={[2, 18]} // min and max glitch delay
           duration={[0.3, 1.0]} // min and max glitch duration
           strength={[0.3, 1.0]} // min and max glitch strength
           active
         />
+        <Bloom
+          luminanceThreshold={0.4}
+          luminanceSmoothing={3.3}
+          height={300}
+          opacity={0.8}
+        />
+        <Noise opacity={0.015} />
         <Vignette eskil={false} offset={0.2} darkness={1.1} />
       </EffectComposer>
       {children}
