@@ -2,6 +2,7 @@ import useStore from '@/helpers/store'
 import Head from 'next/head'
 import Navigation from '@/components/dom/navigation'
 import Greeting from '@/components/dom/greeting'
+import Controls from '@/components/dom/controls'
 
 const Header = () => {
   const title = useStore((s) => s.title)
@@ -11,6 +12,7 @@ const Header = () => {
     </Head>
   )
 }
+
 const Dom = ({ dom }) => {
   const events = useStore((s) => s.events)
   return (
@@ -18,6 +20,7 @@ const Dom = ({ dom }) => {
       <Header />
       <Navigation />
       <Greeting />
+      <Controls />
       {dom}
     </div>
   )

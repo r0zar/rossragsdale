@@ -24,7 +24,7 @@ const BlogPostComponent = () => {
   }, [])
   const router = useStore((s) => s.router)
   const mesh = useControls('Blog Post', {
-    position: [10, 0, 0],
+    position: [10, 0.1, 0],
     rotation: [0, Math.PI / -2, 0],
     maxWidth: 2.5,
   })

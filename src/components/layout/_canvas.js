@@ -1,8 +1,8 @@
-import { Canvas } from 'react-three-fiber'
+import { Canvas, useThree } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
-import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
-import { animated, useSpring } from '@react-spring/three'
+import { Preload } from '@react-three/drei'
+import { animated, useSpring, config } from '@react-spring/three'
 import {
   Bloom,
   EffectComposer,
@@ -11,12 +11,15 @@ import {
   Vignette,
 } from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
+import { useEffect, useRef } from 'react'
 
 // enable shader editor
 // import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
 
 const Bg = () => {
-  const background = useControls({ color: { r: 0, b: 0, g: 0, a: 0.5 } })
+  const background = useControls('Background', {
+    color: { r: 0, b: 0, g: 0, a: 0.5 },
+  })
   const bg = useSpring({
     ...background.color,
   })
@@ -36,12 +39,12 @@ const LCanvas = ({ children }) => {
         stencil: false,
         depth: false,
       }}
+      orthographic={true}
       pixelRatio={[1, 2]}
       onCreated={({ events }) => {
         useStore.setState({ events })
       }}
     >
-      {/* <OrbitControls /> */}
       <Leva hidden={true} />
       <SelectionControls />
       <Preload all />
@@ -74,19 +77,30 @@ const LCanvas = ({ children }) => {
 }
 
 const SelectionControls = () => {
-  const camera = useControls('Camera', {
+  const { setDefaultCamera } = useThree()
+  const ref = useRef()
+  const y = useStore((s) => s.cameraRotationY)
+  const controls = useControls('Camera', {
     position: [0, 0, 0],
-    rotation: [0, Math.PI, 0],
+    rotation: [0, 0, 0],
     zoom: 250,
   })
+  const props = useSpring({
+    config: config.molasses,
+    rotation: [0, y, 0],
+  })
+
+  useEffect(() => {
+    setDefaultCamera(ref.current)
+  }, [setDefaultCamera])
+
   return (
-    <OrthographicCamera
-      makeDefault
-      near={0}
+    <animated.orthographicCamera
+      ref={ref}
       far={15}
-      position={camera.position}
-      rotation={camera.rotation}
-      zoom={camera.zoom}
+      position={controls.position}
+      {...props}
+      zoom={controls.zoom}
     />
   )
 }
