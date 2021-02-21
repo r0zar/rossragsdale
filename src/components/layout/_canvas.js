@@ -1,18 +1,20 @@
 import { Canvas } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
-import { OrbitControls, Preload } from '@react-three/drei'
-import { a, useSpring } from '@react-spring/three'
+import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
+import { animated, useSpring } from '@react-spring/three'
 import { EffectComposer, Vignette } from '@react-three/postprocessing'
+import { useControls } from 'leva'
+
 // enable shader editor
 // import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
 
 const Bg = () => {
-  const router = useStore((state) => state.router)
-  const { bg } = useSpring({
-    bg: router && router.route !== '/box' ? 0 : 0x17 / 255,
+  const background = useControls({ color: { r: 0, b: 0, g: 0, a: 0.5 } })
+  const bg = useSpring({
+    ...background.color,
   })
-  return <a.color attach='background' r={bg} g={bg} b={bg} />
+  return <animated.color attach='background' r={bg.r} g={bg.g} b={bg.b} />
 }
 const LCanvas = ({ children }) => {
   return (
@@ -25,10 +27,11 @@ const LCanvas = ({ children }) => {
         useStore.setState({ events })
       }}
     >
+      {/* <OrbitControls /> */}
+      <SelectionControls />
       <Preload all />
       <Bg />
       <Perf openByDefault trackGPU={true} position={'bottom-right'} />
-      <OrbitControls />
       {/* <MaterialEditor /> */}
       {/* <EffectComposer ref={useEditorComposer()}> */}
       <EffectComposer>
@@ -36,6 +39,24 @@ const LCanvas = ({ children }) => {
       </EffectComposer>
       {children}
     </Canvas>
+  )
+}
+
+const SelectionControls = () => {
+  const camera = useControls('Camera', {
+    position: [0, 0, 0],
+    rotation: [0, Math.PI, 0],
+    zoom: 250,
+  })
+  return (
+    <OrthographicCamera
+      makeDefault
+      near={0}
+      far={15}
+      position={camera.position}
+      rotation={camera.rotation}
+      zoom={camera.zoom}
+    />
   )
 }
 

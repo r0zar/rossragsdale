@@ -13,7 +13,7 @@ const SphereComponent = () => {
   })
   const sphere = useControls('Sphere', {
     args: [1, 32, 32],
-    position: [0, 0, 0],
+    position: [0, 0, -10],
   })
   return (
     <Suspense fallback={null}>

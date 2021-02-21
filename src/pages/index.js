@@ -7,6 +7,12 @@ const BlogPost = dynamic(() => import('@/components/canvas/BlogPost'), {
 const Sphere = dynamic(() => import('@/components/canvas/Sphere'), {
   ssr: false,
 })
+const PointBlankDev = dynamic(
+  () => import('@/components/canvas/PointBlankDev'),
+  {
+    ssr: false,
+  }
+)
 
 const Page = () => {
   useStore.setState({ title: 'rossragsdale.com' })
@@ -14,6 +20,7 @@ const Page = () => {
     <>
       <Sphere r3f />
       <BlogPost r3f />
+      <PointBlankDev r3f />
     </>
   )
 }
