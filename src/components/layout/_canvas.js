@@ -3,17 +3,8 @@ import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
 import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
 import { animated, useSpring } from '@react-spring/three'
-import {
-  EffectComposer,
-  Glitch,
-  GodRays,
-  Noise,
-  SMAA,
-  SSAO,
-  Vignette,
-} from '@react-three/postprocessing'
+import { EffectComposer, Glitch, Vignette } from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
-import { Suspense } from 'react'
 
 // enable shader editor
 // import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
@@ -32,6 +23,7 @@ const LCanvas = ({ children }) => {
         position: 'absolute',
         top: 0,
       }}
+      pixelRatio={[1, 2]}
       onCreated={({ events }) => {
         useStore.setState({ events })
       }}
