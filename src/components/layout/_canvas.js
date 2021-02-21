@@ -3,8 +3,17 @@ import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
 import { OrbitControls, OrthographicCamera, Preload } from '@react-three/drei'
 import { animated, useSpring } from '@react-spring/three'
-import { EffectComposer, Vignette } from '@react-three/postprocessing'
+import {
+  EffectComposer,
+  Glitch,
+  GodRays,
+  Noise,
+  SMAA,
+  SSAO,
+  Vignette,
+} from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
+import { Suspense } from 'react'
 
 // enable shader editor
 // import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
@@ -35,10 +44,19 @@ const LCanvas = ({ children }) => {
       <Perf openByDefault trackGPU={true} position={'bottom-right'} />
       {/* <MaterialEditor /> */}
       {/* <EffectComposer ref={useEditorComposer()}> */}
+
       <EffectComposer>
+        {/* <Noise opacity={0.04} /> */}
+        <Glitch
+          delay={[2, 8]} // min and max glitch delay
+          duration={[0.3, 1.0]} // min and max glitch duration
+          strength={[0.3, 1.0]} // min and max glitch strength
+          active
+        />
         <Vignette eskil={false} offset={0.2} darkness={1.1} />
       </EffectComposer>
       {children}
+      {/* <fog attach='fog' args={['black', 0, 30]} /> */}
     </Canvas>
   )
 }

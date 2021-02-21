@@ -21,7 +21,7 @@ const Logo = () => {
   useFrame((state, delta) => {
     t += delta
     logo.current.position.y = Math.sin(t) * 0.03
-    logo.current.rotation.x = Math.PI / 2 + Math.cos(t / 3) * 0.01
+    logo.current.rotation.x = 0.13 + Math.PI / 2 + Math.cos(t / 3) * 0.01
     logo.current.rotation.y = Math.sin(t / 4) * 0.01
     logo.current.rotation.z = Math.PI + Math.sin(t) * 0.01
   })
