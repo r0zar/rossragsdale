@@ -34,7 +34,6 @@ function useWindowSize() {
 const Controls = () => {
   const store = useStore()
   const windowSize = useWindowSize()
-  console.log(windowSize)
   const props = useSpring({
     top: windowSize.height / 2,
     opacity: 1,
@@ -42,9 +41,9 @@ const Controls = () => {
     from: { opacity: 0, color: 'black' },
   })
   return (
-    <nav className='text-6xl cursor-pointer select-none'>
+    <nav>
       <animated.i
-        className='fixed left-10'
+        className='fixed text-6xl cursor-pointer select-none left-10'
         style={props}
         onClick={() => {
           useStore.setState({
@@ -55,7 +54,7 @@ const Controls = () => {
         «
       </animated.i>
       <animated.i
-        className='fixed right-10'
+        className='fixed text-6xl cursor-pointer select-none right-10'
         style={props}
         onClick={() => {
           useStore.setState({
