@@ -42,7 +42,7 @@ const Controls = () => {
     from: { opacity: 0, color: 'black' },
   })
   return (
-    <nav className='text-6xl cursor-pointer'>
+    <nav className='text-6xl cursor-pointer select-none'>
       <animated.i
         className='fixed left-10'
         style={props}
