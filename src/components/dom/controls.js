@@ -34,17 +34,34 @@ function useWindowSize() {
 const Controls = () => {
   const store = useStore()
   const windowSize = useWindowSize()
-  const props = useSpring({
+  const left = useSpring({
     top: windowSize.height / 2,
     opacity: 1,
+    position: 'absolute',
     color: '#282828',
+    left: 10,
+    fontSize: '64px',
+    cursor: 'pointer',
+    userSelect: 'none',
+    padding: '4px',
+    from: { opacity: 0, color: 'black' },
+  })
+  const right = useSpring({
+    top: windowSize.height / 2,
+    opacity: 1,
+    position: 'absolute',
+    color: '#282828',
+    right: 18,
+    fontSize: '64px',
+    cursor: 'pointer',
+    userSelect: 'none',
+    padding: '4px',
     from: { opacity: 0, color: 'black' },
   })
   return (
     <nav>
       <animated.i
-        className='absolute text-6xl cursor-pointer select-none left-10'
-        style={props}
+        style={left}
         onClick={() => {
           useStore.setState({
             cameraRotationY: (store.cameraRotationY += Math.PI / 2),
@@ -54,8 +71,7 @@ const Controls = () => {
         «
       </animated.i>
       <animated.i
-        className='absolute text-6xl cursor-pointer select-none right-10'
-        style={props}
+        style={right}
         onClick={() => {
           useStore.setState({
             cameraRotationY: (store.cameraRotationY -= Math.PI / 2),
