@@ -96,7 +96,7 @@ const SelectionControls = () => {
         ref={ref}
         far={15}
         position={controls.position}
-        zoom={controls.zoom * Math.sqrt(size.width) * 5}
+        zoom={controls.zoom * Math.sqrt(size.width) * 6}
         {...props}
       />
     </>
