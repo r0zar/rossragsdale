@@ -16,6 +16,7 @@ const PointBlankDevComponent = () => {
 }
 
 const Logo = () => {
+  const router = useStore((s) => s.router)
   let t = 0
   useFrame((state, delta) => {
     t += delta
@@ -58,6 +59,7 @@ const Logo = () => {
       scale={mesh.scale}
       rotation={mesh.rotation}
       position={mesh.position}
+      onClick={() => router.push('https://pointblankdev.com')}
     >
       <spotLight
         ref={spotLight1}

@@ -18,7 +18,11 @@ const SphereComponent = () => {
   return (
     <Suspense fallback={null}>
       <ambientLight intensity={0.5} />
-      <Sphere args={sphere.args} position={sphere.position}>
+      <Sphere
+        args={sphere.args}
+        position={sphere.position}
+        onClick={() => router.push('https://twitter.com/lordrozar')}
+      >
         <M factor={2} color={color} />
       </Sphere>
       <Environment preset={'studio'} />

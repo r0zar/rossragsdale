@@ -31,7 +31,13 @@ const BlogPostComponent = () => {
   return (
     <Suspense fallback={null}>
       <ambientLight intensity={0.4} />
-      <mesh position={mesh.position} rotation={mesh.rotation}>
+      <mesh
+        position={mesh.position}
+        rotation={mesh.rotation}
+        onClick={() => {
+          router.push(post.url)
+        }}
+      >
         <Text
           depthOffset={1}
           textAlign='center'
@@ -39,9 +45,6 @@ const BlogPostComponent = () => {
           position={[0, 0, 0.03]}
           color='#575757'
           fontSize={0.18}
-          onClick={() => {
-            router.push(post.url)
-          }}
         >
           {post.title}
         </Text>
