@@ -43,7 +43,7 @@ const Controls = () => {
   return (
     <nav>
       <animated.i
-        className='fixed text-6xl cursor-pointer select-none left-10'
+        className='absolute text-6xl cursor-pointer select-none left-10'
         style={props}
         onClick={() => {
           useStore.setState({
@@ -54,7 +54,7 @@ const Controls = () => {
         «
       </animated.i>
       <animated.i
-        className='fixed text-6xl cursor-pointer select-none right-10'
+        className='absolute text-6xl cursor-pointer select-none right-10'
         style={props}
         onClick={() => {
           useStore.setState({
