@@ -1,20 +1,19 @@
 import { Canvas, useThree } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
-import { Preload } from '@react-three/drei'
+import { Effects, Html, OrthographicCamera, Preload } from '@react-three/drei'
 import { animated, useSpring, config } from '@react-spring/three'
 import {
   Bloom,
   EffectComposer,
   Glitch,
   Noise,
+  SMAA,
   Vignette,
 } from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
-import { useEffect, useRef } from 'react'
-
-// enable shader editor
-// import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
+import { Suspense, useEffect, useRef } from 'react'
+import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
 
 const Bg = () => {
   const background = useControls('Background', {
@@ -39,6 +38,7 @@ const LCanvas = ({ children }) => {
         stencil: false,
         depth: false,
       }}
+      camera={{ position: [0, 0, 0], zoom: 250 }}
       orthographic={true}
       pixelRatio={[1, 2]}
       onCreated={({ events }) => {
@@ -49,35 +49,15 @@ const LCanvas = ({ children }) => {
       <SelectionControls />
       <Preload all />
       <Bg />
-      <Perf openByDefault trackGPU={true} position={'bottom-right'} />
-      {/* <MaterialEditor /> */}
-      {/* <EffectComposer ref={useEditorComposer()}> */}
-
-      <EffectComposer>
-        {/* <Noise opacity={0.04} /> */}
-        <Glitch
-          delay={[2, 18]} // min and max glitch delay
-          duration={[0.3, 1.0]} // min and max glitch duration
-          strength={[0.3, 1.0]} // min and max glitch strength
-          active
-        />
-        <Bloom
-          luminanceThreshold={0.4}
-          luminanceSmoothing={3.3}
-          height={300}
-          opacity={0.8}
-        />
-        <Noise opacity={0.015} />
-        <Vignette eskil={false} offset={0.2} darkness={1.1} />
-      </EffectComposer>
+      <Perf trackGPU={true} position={'bottom-right'} />
       {children}
-      {/* <fog attach='fog' args={['black', 0, 30]} /> */}
+      <fog attach='fog' args={['green', 0, 600]} />
     </Canvas>
   )
 }
 
 const SelectionControls = () => {
-  const { setDefaultCamera } = useThree()
+  const { camera, setDefaultCamera } = useThree()
   const ref = useRef()
   const y = useStore((s) => s.cameraRotationY)
   const controls = useControls('Camera', {
@@ -95,13 +75,33 @@ const SelectionControls = () => {
   }, [setDefaultCamera])
 
   return (
-    <animated.orthographicCamera
-      ref={ref}
-      far={15}
-      position={controls.position}
-      {...props}
-      zoom={controls.zoom}
-    />
+    <>
+      {ref.current && (
+        <EffectComposer>
+          <Glitch
+            delay={[2, 18]}
+            duration={[0.3, 1.0]}
+            strength={[0.3, 1.0]}
+            active
+          />
+          <Bloom
+            luminanceThreshold={0.4}
+            luminanceSmoothing={3.3}
+            height={300}
+            opacity={0.8}
+          />
+          <Noise opacity={0.015} />
+          <Vignette eskil={false} offset={0.2} darkness={1.1} />
+        </EffectComposer>
+      )}
+      <animated.orthographicCamera
+        ref={ref}
+        far={15}
+        position={controls.position}
+        {...props}
+        zoom={controls.zoom}
+      />
+    </>
   )
 }
 

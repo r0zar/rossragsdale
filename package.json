@@ -31,10 +31,10 @@
   },
   "dependencies": {
     "@pmndrs/branding": "^0.0.7",
-    "@react-hook/window-size": "^3.0.7",
     "@react-spring/three": "^9.0.0-rc.3",
     "@react-three/drei": "^3.8.6",
     "@react-three/postprocessing": "^1.5.1",
+    "@three-material-editor/react": "^0.3.0-alpha.0",
     "@tryghost/content-api": "^1.4.14",
     "lerp": "^1.0.3",
     "leva": "^0.3.1",

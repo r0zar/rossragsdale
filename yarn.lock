@@ -922,6 +922,22 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@monaco-editor/loader@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.0.0.tgz#c7ea78ef07cebcae83d92bbfe2bddab563468102"
+  integrity sha512-CA35bf5Y7wFWfeJZfkLslOxiatln3oTBKkfbdo+TF5H+UdPP96qHvhOUjjd1DeQ2NWsRkVPSnoSYek7NE5B26w==
+  dependencies:
+    state-local "^1.0.6"
+
+"@monaco-editor/react@^4.0.9":
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.0.10.tgz#401d1832854687070be116e651f7308ce65d4c0e"
+  integrity sha512-qORktN6jrypnLrgzCuuKynNNVeHY98q7waSxP+XVXot7KZp3B+x7qokZa4KqI47CohhyamF2u1jqH0tQuX2kIA==
+  dependencies:
+    "@monaco-editor/loader" "^1.0.0"
+    prop-types "^15.7.2"
+    state-local "^1.0.7"
+
 "@next/bundle-analyzer@^10.0.7":
   version "10.0.7"
   resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-10.0.7.tgz#5ea7e7f720b1995ed528af2cc322bfa5419cd3fa"
@@ -982,46 +998,6 @@
   version "1.0.0-next.11"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
   integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
-
-"@react-hook/debounce@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@react-hook/debounce/-/debounce-3.0.0.tgz#9eea8b5d81d4cb67cd72dd8657b3ff724afc7cad"
-  integrity sha512-ir/kPrSfAzY12Gre0sOHkZ2rkEmM4fS5M5zFxCi4BnCeXh2nvx9Ujd+U4IGpKCuPA+EQD0pg1eK2NGLvfWejag==
-  dependencies:
-    "@react-hook/latest" "^1.0.2"
-
-"@react-hook/event@^1.2.1":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@react-hook/event/-/event-1.2.3.tgz#cfe86d5cf36f53e85b367ff619990d001b5c82ae"
-  integrity sha512-WMBwLnYY2rubLeecsi4skl1imfx0oiXTgazV/1ByPT6WkmLvxUao3hC+mxps5D/+JK4Fq3uG9OWU/dn5jMtXyg==
-  dependencies:
-    "@react-hook/passive-layout-effect" "^1.2.0"
-
-"@react-hook/latest@^1.0.2":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@react-hook/latest/-/latest-1.0.3.tgz#c2d1d0b0af8b69ec6e2b3a2412ba0768ac82db80"
-  integrity sha512-dy6duzl+JnAZcDbNTfmaP3xHiKtbXYOaz3G51MGVljh548Y8MWzTr+PHLOfvpypEVW9zwvl+VyKjbWKEVbV1Rg==
-
-"@react-hook/passive-layout-effect@^1.2.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@react-hook/passive-layout-effect/-/passive-layout-effect-1.2.1.tgz#c06dac2d011f36d61259aa1c6df4f0d5e28bc55e"
-  integrity sha512-IwEphTD75liO8g+6taS+4oqz+nnroocNfWVHWz7j+N+ZO2vYrc6PV1q7GQhuahL0IOR7JccFTsFKQ/mb6iZWAg==
-
-"@react-hook/throttle@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@react-hook/throttle/-/throttle-2.2.0.tgz#d0402714a06e1ba0bc1da1fdf5c3c5cd0e08d45a"
-  integrity sha512-LJ5eg+yMV8lXtqK3lR+OtOZ2WH/EfWvuiEEu0M3bhR7dZRfTyEJKxH1oK9uyBxiXPtWXiQggWbZirMCXam51tg==
-  dependencies:
-    "@react-hook/latest" "^1.0.2"
-
-"@react-hook/window-size@^3.0.7":
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-3.0.7.tgz#00d176e7a8eb55814e161eae34aae20afbcbe35d"
-  integrity sha512-bK5ed/jN+cxy0s1jt2CelCnUt7jZRseUvPQ22ZJkUl/QDOsD+7CA/6wcqC3c0QweM/fPBRP6uI56TJ48SnlVww==
-  dependencies:
-    "@react-hook/debounce" "^3.0.0"
-    "@react-hook/event" "^1.2.1"
-    "@react-hook/throttle" "^2.2.0"
 
 "@react-icons/all-files@^4.1.0":
   version "4.1.0"
@@ -1181,6 +1157,27 @@
   dependencies:
     ejs "^2.6.1"
     magic-string "^0.25.0"
+
+"@three-material-editor/core@^0.3.0-alpha.0":
+  version "0.3.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@three-material-editor/core/-/core-0.3.0-alpha.0.tgz#41a9af8ec79fea78a1dff4d6d07b543764dfc14d"
+  integrity sha512-a5s8nceeW6adIMnKOcU9OmTmrl3Yc/WitgJikH1KmyDcbiq6E9swNoNYNAPBuYdMTYhhGdika3kz39Z7zix1gQ==
+  dependencies:
+    "@monaco-editor/react" "^4.0.9"
+    autoprefixer "^10.2.3"
+    leva "^0.3.1"
+    monaco-editor "^0.21.3"
+    react-icons "^4.1.0"
+    react-use-gesture "^9.0.0"
+    three "^0.124.0"
+    valtio "^0.7.0"
+
+"@three-material-editor/react@^0.3.0-alpha.0":
+  version "0.3.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@three-material-editor/react/-/react-0.3.0-alpha.0.tgz#35bf4f07392dc7c3acab41d65cd49fe2e4b01b08"
+  integrity sha512-QCUHbZC0qeWZzY4gFI7n6NF/C5Es+rhLKio2dPhLXDKa/eLPFvBbRVh3aTiosufbYiW772GVcaVlsq9sE4i1ew==
+  dependencies:
+    "@three-material-editor/core" "^0.3.0-alpha.0"
 
 "@tryghost/content-api@^1.4.14":
   version "1.4.14"
@@ -1667,7 +1664,7 @@ attr-accept@^2.2.1:
   resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-2.2.2.tgz#646613809660110749e92f2c10833b70968d929b"
   integrity sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==
 
-autoprefixer@^10.2.4:
+autoprefixer@^10.2.3, autoprefixer@^10.2.4:
   version "10.2.4"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.2.4.tgz#c0e7cf24fcc6a1ae5d6250c623f0cb8beef2f7e1"
   integrity sha512-DCCdUQiMD+P/as8m3XkeTUkUKuuRqLGcwD0nll7wevhqoJfMRpJlkFd1+MQh1pvupjiQuip42lc/VFvfUTMSKw==
@@ -4736,6 +4733,11 @@ modern-normalize@^1.0.0:
   resolved "https://registry.yarnpkg.com/modern-normalize/-/modern-normalize-1.0.0.tgz#539d84a1e141338b01b346f3e27396d0ed17601e"
   integrity sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
 
+monaco-editor@^0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.21.3.tgz#3381b66614b64d1c5e3b77dd5564ad496d1b4e5d"
+  integrity sha512-9N7wATLpi+googstvtm6IKg97vPQ77FDYEpkow5tLriM/VJ0DaTRyUP4UVzcoH7KlPDX+e/rE7/imcOUeGkT6g==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -5556,6 +5558,11 @@ proxy-addr@~2.0.5:
     forwarded "~0.1.2"
     ipaddr.js "1.9.1"
 
+proxy-compare@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-1.1.6.tgz#dd7737be611a9d7142fae10dbc6d0ceb74ad6da0"
+  integrity sha512-V65euKrKgKjVyEh5+4nVlAf4dHJ6Q0cF77MCeZiJaOldAl9lndy/u270SJneHiz3UkVcSIhxfOKY7aFkrMyo5g==
+
 public-encrypt@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/public-encrypt/-/public-encrypt-4.0.3.tgz#4fcc9d77a07e48ba7527e7cbe0de33d0701331e0"
@@ -5728,6 +5735,11 @@ react-dropzone@^11.3.1:
     file-selector "^0.2.2"
     prop-types "^15.7.2"
 
+react-icons@^4.1.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
+  integrity sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==
+
 react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5792,7 +5804,7 @@ react-three-fiber@^5.3.18:
     use-asset "^1.0.2"
     utility-types "^3.10.0"
 
-react-use-gesture@^9.0.2:
+react-use-gesture@^9.0.0, react-use-gesture@^9.0.2:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.4.tgz#7e0428007df31b6d8daae37c2fb01e9f40283623"
   integrity sha512-G0sbQY+HSm2gSVIlD+LE1unpVpG7YZRTr8TI72vo0Nu1lecJtvjbcY3ZLonEZLTtODJgLL6nBllMRXyy0bRSQA==
@@ -6455,6 +6467,11 @@ stacktrace-parser@0.1.10:
   dependencies:
     type-fest "^0.7.1"
 
+state-local@^1.0.6, state-local@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/state-local/-/state-local-1.0.7.tgz#da50211d07f05748d53009bee46307a37db386d5"
+  integrity sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
+
 static-eval@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/static-eval/-/static-eval-2.1.0.tgz#a16dbe54522d7fa5ef1389129d813fd47b148014"
@@ -6841,6 +6858,11 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+three@^0.124.0:
+  version "0.124.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.124.0.tgz#14ab1a26ba6c56e51190e1b55695cd3c1e69ea55"
+  integrity sha512-ROXp1Ly7YyF+jC910DQyAWj++Qlw2lQv0qwYLNQwdDbjk4bsOXAfGO92wYTMPNei1GMJUmCxSxc3MjGBTS09Rg==
+
 three@^0.125.2:
   version "0.125.2"
   resolved "https://registry.yarnpkg.com/three/-/three-0.125.2.tgz#dcba12749a2eb41522e15212b919cd3fbf729b12"
@@ -7181,6 +7203,13 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+valtio@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/valtio/-/valtio-0.7.0.tgz#26752b6df2aac710630878c41a0a494f42ab94ba"
+  integrity sha512-ekxeojLsUiiNwMRRC8NcD1vGRtcMgsZMrePVgjaZszKzLFWJ84uBhtLa5QvwnuuhgU2Mbnaq4IyQHjkNqCi1YA==
+  dependencies:
+    proxy-compare "1.1.6"
 
 vary@~1.1.2:
   version "1.1.2"
