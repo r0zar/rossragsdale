@@ -1,18 +1,17 @@
 import { Canvas, useThree } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
-import { Effects, Html, OrthographicCamera, Preload } from '@react-three/drei'
+import { Preload } from '@react-three/drei'
 import { animated, useSpring, config } from '@react-spring/three'
 import {
   Bloom,
   EffectComposer,
   Glitch,
   Noise,
-  SMAA,
   Vignette,
 } from '@react-three/postprocessing'
 import { Leva, useControls } from 'leva'
-import { Suspense, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
 
 const Bg = () => {
@@ -38,8 +37,6 @@ const LCanvas = ({ children }) => {
         stencil: false,
         depth: false,
       }}
-      camera={{ position: [0, 0, 0], zoom: 250 }}
-      orthographic={true}
       pixelRatio={[1, 2]}
       onCreated={({ events }) => {
         useStore.setState({ events })
@@ -57,13 +54,14 @@ const LCanvas = ({ children }) => {
 }
 
 const SelectionControls = () => {
-  const { camera, setDefaultCamera } = useThree()
+  const { setDefaultCamera, size } = useThree()
+  console.log('w', size.width)
   const ref = useRef()
   const y = useStore((s) => s.cameraRotationY)
   const controls = useControls('Camera', {
     position: [0, 0, 0],
     rotation: [0, 0, 0],
-    zoom: 250,
+    zoom: 1,
   })
   const props = useSpring({
     config: config.molasses,
@@ -98,11 +96,40 @@ const SelectionControls = () => {
         ref={ref}
         far={15}
         position={controls.position}
+        zoom={controls.zoom * Math.sqrt(size.width) * 5}
         {...props}
-        zoom={controls.zoom}
       />
     </>
   )
 }
 
 export default LCanvas
+
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== 'undefined') {
+      // Handler to call on window resize
+      const handleResize = () => {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
+      // Add event listener
+      window.addEventListener('resize', handleResize)
+      // Call handler right away so state gets updated with initial window size
+      handleResize()
+      // Remove event listener on cleanup
+      return () => window.removeEventListener('resize', handleResize)
+    }
+  }, []) // Empty array ensures that effect is only run on mount
+  return windowSize
+}

@@ -1,8 +1,7 @@
-import { Suspense, useRef, forwardRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { Environment, useGLTF, useHelper } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useControls } from 'leva'
-import { Object3D, SpotLightHelper, Vector3 } from 'three'
 import { useFrame } from 'react-three-fiber'
 
 const PointBlankDevComponent = () => {
