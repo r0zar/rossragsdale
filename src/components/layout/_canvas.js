@@ -35,7 +35,7 @@ const Bg = () => {
         attach='background'
         args={[background.r, background.g, background.b]}
       />
-      <fog attach='fog' args={['black', 0, 100]} />
+      <fog attach='fog' args={['black', 0, 50]} />
     </>
   )
 }
@@ -58,11 +58,11 @@ const LCanvas = ({ children }) => {
         useStore.setState({ events })
       }}
     >
-      <Stars />
       <Leva hidden={true} />
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
         <Environment preset={'studio'} />
+        <Stars />
       </Suspense>
       {/* <FlyControls rollSpeed={0.1} /> */}
       <SelectionControls />
@@ -124,7 +124,7 @@ const SelectionControls = () => {
       )}
       <animated.orthographicCamera
         ref={ref}
-        far={100}
+        far={50}
         position={controls.position}
         zoom={controls.zoom * Math.sqrt(size.width) * 5}
         {...props}
@@ -137,25 +137,24 @@ function Stars() {
   const [geo, mat, vertices, coords] = useMemo(() => {
     const geo = new THREE.SphereBufferGeometry(0.01, 10, 10)
     const mat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('gray'),
+      color: new THREE.Color('#161616'),
     })
     const coords = new Array(10000)
       .fill()
       .map((i) => [
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
+        Math.random() * 100 - 50,
+        Math.random() * 100 - 50,
+        Math.random() * 100 - 50,
       ])
     return [geo, mat, vertices, coords]
   }, [])
 
   let group = useRef()
   useFrame(() => {
-    console.log(group.current.children[0].position.y)
     group.current.children.forEach((p) => {
       p.position.y -= 0.25
-      if (p.position.y < -100) {
-        p.position.y = 100
+      if (p.position.y < -50) {
+        p.position.y = 50
         p.velocity = 0
       }
     })
