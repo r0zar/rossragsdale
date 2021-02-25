@@ -30,7 +30,6 @@ const BlogPostComponent = () => {
   })
   return (
     <Suspense fallback={null}>
-      <ambientLight intensity={0.4} />
       <mesh
         position={mesh.position}
         rotation={mesh.rotation}
@@ -58,7 +57,6 @@ const BlogPostComponent = () => {
           {post.excerpt}
         </Text>
       </mesh>
-      <Environment preset={'studio'} />
     </Suspense>
   )
 }

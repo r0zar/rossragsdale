@@ -1,16 +1,14 @@
-import { Suspense, useRef } from 'react'
-import { Environment, useGLTF, useHelper } from '@react-three/drei'
+import { Suspense, useEffect, useRef } from 'react'
+import { Environment, useGLTF, useHelper, useProgress } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useControls } from 'leva'
 import { useFrame } from 'react-three-fiber'
+// import { SpotLightHelper } from 'three'
 
 const PointBlankDevComponent = () => {
-  // console.log(logo.current)
   return (
     <Suspense fallback={null}>
-      <ambientLight intensity={0.6} />
       <Logo />
-      <Environment preset={'studio'} />
     </Suspense>
   )
 }

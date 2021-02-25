@@ -8,6 +8,7 @@ const useStore = create((set) => {
       set({ events })
     },
     cameraRotationY: Math.PI,
+    cameraRotationX: -Math.PI / 2,
   }
 })
 
