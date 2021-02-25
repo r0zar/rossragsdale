@@ -35,7 +35,7 @@ const Bg = () => {
         attach='background'
         args={[background.r, background.g, background.b]}
       />
-      <fog attach='fog' args={['black', 0, 50]} />
+      <fog attach='fog' args={['black', 0, 100]} />
     </>
   )
 }
@@ -137,7 +137,7 @@ function Stars() {
   const [geo, mat, vertices, coords] = useMemo(() => {
     const geo = new THREE.SphereBufferGeometry(0.01, 10, 10)
     const mat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('#161616'),
+      color: new THREE.Color('#121212'),
     })
     const coords = new Array(10000)
       .fill()
