@@ -1,4 +1,10 @@
-import { Canvas, useThree } from 'react-three-fiber'
+import {
+  Canvas,
+  render,
+  useFrame,
+  useThree,
+  useUpdate,
+} from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
 import { Environment, Preload, useProgress } from '@react-three/drei'
@@ -11,18 +17,17 @@ import {
   Vignette,
 } from '@react-three/postprocessing'
 import { Leva, store, useControls } from 'leva'
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
 import _ from 'lodash'
+import { BufferGeometry, Points } from 'three'
+import * as THREE from 'three/src/Three'
 
 const Bg = () => {
   const background = useControls('Background', {
     r: 0,
     b: 0,
     g: 0,
-  })
-  const bg = useSpring({
-    ...background,
   })
   return (
     <>
@@ -53,6 +58,7 @@ const LCanvas = ({ children }) => {
         useStore.setState({ events })
       }}
     >
+      <Stars />
       <Leva hidden={true} />
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
@@ -61,7 +67,7 @@ const LCanvas = ({ children }) => {
       {/* <FlyControls rollSpeed={0.1} /> */}
       <SelectionControls />
       <Preload all />
-      {/* <Bg /> */}
+      <Bg />
       <Perf trackGPU={true} position={'bottom-right'} />
       {children}
     </Canvas>
@@ -118,12 +124,48 @@ const SelectionControls = () => {
       )}
       <animated.orthographicCamera
         ref={ref}
-        far={15}
+        far={100}
         position={controls.position}
         zoom={controls.zoom * Math.sqrt(size.width) * 5}
         {...props}
       />
     </>
+  )
+}
+
+function Stars() {
+  const [geo, mat, vertices, coords] = useMemo(() => {
+    const geo = new THREE.SphereBufferGeometry(0.01, 10, 10)
+    const mat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color('gray'),
+    })
+    const coords = new Array(10000)
+      .fill()
+      .map((i) => [
+        Math.random() * 200 - 100,
+        Math.random() * 200 - 100,
+        Math.random() * 200 - 100,
+      ])
+    return [geo, mat, vertices, coords]
+  }, [])
+
+  let group = useRef()
+  useFrame(() => {
+    console.log(group.current.children[0].position.y)
+    group.current.children.forEach((p) => {
+      p.position.y -= 0.25
+      if (p.position.y < -100) {
+        p.position.y = 100
+        p.velocity = 0
+      }
+    })
+  })
+  return (
+    <group ref={group}>
+      {coords.map(([p1, p2, p3], i) => (
+        <mesh key={i} geometry={geo} material={mat} position={[p1, p2, p3]} />
+      ))}
+    </group>
   )
 }
 
