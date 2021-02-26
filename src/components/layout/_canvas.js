@@ -137,7 +137,7 @@ function Stars() {
   const [geo, mat, vertices, coords] = useMemo(() => {
     const geo = new THREE.SphereBufferGeometry(0.01, 10, 10)
     const mat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('#121212'),
+      color: new THREE.Color('#131313'),
     })
     const coords = new Array(10000)
       .fill()
@@ -152,7 +152,7 @@ function Stars() {
   let group = useRef()
   useFrame(() => {
     group.current.children.forEach((p) => {
-      p.position.y -= 0.25
+      p.position.y -= 0.05
       if (p.position.y < -50) {
         p.position.y = 50
         p.velocity = 0
