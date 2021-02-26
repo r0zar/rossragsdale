@@ -1,10 +1,4 @@
-import {
-  Canvas,
-  render,
-  useFrame,
-  useThree,
-  useUpdate,
-} from 'react-three-fiber'
+import { Canvas, useFrame, useThree } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
 import { Environment, Preload, useProgress } from '@react-three/drei'
@@ -19,8 +13,6 @@ import {
 import { Leva, store, useControls } from 'leva'
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { MaterialEditor, useEditorComposer } from '@three-material-editor/react'
-import _ from 'lodash'
-import { BufferGeometry, Points } from 'three'
 import * as THREE from 'three/src/Three'
 
 const Bg = () => {
@@ -62,7 +54,7 @@ const LCanvas = ({ children }) => {
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
         <Environment preset={'studio'} />
-        <Stars />
+        <Rainfall />
       </Suspense>
       {/* <FlyControls rollSpeed={0.1} /> */}
       <SelectionControls />
@@ -133,29 +125,28 @@ const SelectionControls = () => {
   )
 }
 
-function Stars() {
+function Rainfall() {
+  const group = useRef()
   const [geo, mat, vertices, coords] = useMemo(() => {
     const geo = new THREE.SphereBufferGeometry(0.01, 10, 10)
     const mat = new THREE.MeshBasicMaterial({
       color: new THREE.Color('#131313'),
     })
-    const coords = new Array(10000)
-      .fill()
-      .map((i) => [
+    const coords = new Array(10000).fill().map((i) => {
+      return [
         Math.random() * 100 - 50,
         Math.random() * 100 - 50,
         Math.random() * 100 - 50,
-      ])
+      ]
+    })
     return [geo, mat, vertices, coords]
   }, [])
 
-  let group = useRef()
   useFrame(() => {
     group.current.children.forEach((p) => {
       p.position.y -= 0.05
       if (p.position.y < -50) {
         p.position.y = 50
-        p.velocity = 0
       }
     })
   })

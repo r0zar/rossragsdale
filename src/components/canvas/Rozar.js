@@ -15,22 +15,19 @@ const RozarComponent = () => {
 
 const Logo = () => {
   const router = useStore((s) => s.router)
-  let t = 0
-  useFrame((state, delta) => {
-    t += delta
-    logo.current.position.y = Math.sin(t) * 0.05
-    logo.current.rotation.x = Math.cos(t / 3) * 0.02 + Math.PI / 2
-    logo.current.rotation.y = Math.sin(t / 4) * 0.02 - 0.05
-    logo.current.rotation.z = Math.sin(t) * 0.02 - Math.PI / 2 - 0.35
-  })
   const spotLight1 = useRef()
   const spotLight3 = useRef()
   const logo = useRef()
+  const mesh1 = useRef()
+  const mesh2 = useRef()
+  const mesh3 = useRef()
+  const mesh4 = useRef()
+  const mesh5 = useRef()
   const { nodes, materials } = useGLTF('rozar.glb', true)
   const mesh = useControls('Rozar', {
-    position: [-10, 0, 0.4],
-    rotation: [0, Math.PI / 2, 0],
-    scale: [0.8, 0.8, 0.8],
+    position: [-10, -0.6, 0.4],
+    rotation: [Math.PI / 2, 0, -Math.PI / 2],
+    scale: [0.75, 0.75, 0.75],
   })
   const light1 = useControls('Light R1', {
     intensity: 0.21,
@@ -44,6 +41,14 @@ const Logo = () => {
   })
   // useHelper(spotLight1, SpotLightHelper, 'cyan')
   // useHelper(spotLight3, SpotLightHelper, 'green')
+  let t = 0
+  useFrame((state, delta) => {
+    t += delta
+    logo.current.position.y = Math.sin(t) * 0.05 + mesh.position[1]
+    logo.current.rotation.x = Math.cos(t / 3) * 0.02 + mesh.rotation[0]
+    logo.current.rotation.y = Math.sin(t / 4) * 0.02 - 0.05 + mesh.rotation[1]
+    logo.current.rotation.z = Math.sin(t) * 0.02 - 0.35 + mesh.rotation[2]
+  })
   return (
     <group
       ref={logo}
@@ -67,22 +72,27 @@ const Logo = () => {
         angle={light3.angle}
       />
       <mesh
+        ref={mesh1}
         material={materials['Material.001']}
         geometry={nodes.path449.geometry}
       />
       <mesh
+        ref={mesh2}
         material={materials['Material.001']}
         geometry={nodes.path475.geometry}
       />
       <mesh
+        ref={mesh3}
         material={materials['Material.001']}
         geometry={nodes.path501.geometry}
       />
       <mesh
+        ref={mesh4}
         material={materials['Material.001']}
         geometry={nodes.path527.geometry}
       />
       <mesh
+        ref={mesh5}
         material={materials['Material.001']}
         geometry={nodes.path553.geometry}
       />
