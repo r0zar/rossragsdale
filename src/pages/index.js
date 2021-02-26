@@ -13,6 +13,9 @@ const PointBlankDev = dynamic(
     ssr: false,
   }
 )
+const Rozar = dynamic(() => import('@/components/canvas/Rozar'), {
+  ssr: false,
+})
 
 const Page = () => {
   useStore.setState({ title: 'rossragsdale.com' })
@@ -21,6 +24,7 @@ const Page = () => {
       <Sphere r3f />
       <BlogPost r3f />
       <PointBlankDev r3f />
+      <Rozar r3f />
     </>
   )
 }
