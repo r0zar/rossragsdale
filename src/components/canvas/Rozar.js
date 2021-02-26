@@ -1,9 +1,14 @@
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Environment, useGLTF, useHelper, useProgress } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useControls } from 'leva'
 import { useFrame } from 'react-three-fiber'
+import { animated, config, useSpring } from '@react-spring/three'
 // import { SpotLightHelper } from 'three'
+
+function nearestPow2(aSize) {
+  return Math.pow(2, Math.ceil(Math.log(aSize) / Math.log(2)))
+}
 
 const RozarComponent = () => {
   return (
@@ -41,6 +46,66 @@ const Logo = () => {
   })
   // useHelper(spotLight1, SpotLightHelper, 'cyan')
   // useHelper(spotLight3, SpotLightHelper, 'green')
+
+  const [ready, setReady] = useState(false)
+  const playerOptions = useRef({
+    playing: false,
+    pausedAt: 0,
+    playedAt: 0,
+  })
+  const [num, setNum] = useState(16)
+  const [track, setTrack] = useState('Chapter III')
+  const audioContext = useRef(
+    new (window.AudioContext || window.webkitAudioContext)()
+  )
+  const analyser = useRef(audioContext.current.createAnalyser())
+  const currentSource = useRef(null)
+  const currentBuffer = useRef(null)
+
+  useEffect(() => {
+    analyser.current.fftSize = nearestPow2(num) * 2
+    analyser.current.maxDecibels = 0
+  }, [num])
+
+  useEffect(() => {
+    fetch(track + '.mp3').then((res) => {
+      res.arrayBuffer().then((value) => {
+        audioContext.current.decodeAudioData(value).then((audioBuffer) => {
+          currentBuffer.current = audioBuffer
+          setReady(true)
+        })
+      })
+    })
+    return () => {
+      if (playerOptions.current.playing) play()
+      currentBuffer.current = null
+      playerOptions.current = {
+        playing: false,
+        pausedAt: 0,
+        playedAt: 0,
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [track])
+
+  const play = useCallback(() => {
+    if (!playerOptions.current.playing) {
+      const source = audioContext.current.createBufferSource()
+      source.buffer = currentBuffer.current
+      source.connect(analyser.current)
+      analyser.current.connect(audioContext.current.destination)
+      currentSource.current = source
+      currentSource.current.start(0, playerOptions.current.pausedAt)
+      playerOptions.current.playedAt =
+        audioContext.current.currentTime - playerOptions.current.pausedAt
+    } else {
+      playerOptions.current.pausedAt =
+        audioContext.current.currentTime - playerOptions.current.playedAt
+      currentSource.current.stop()
+    }
+    return (playerOptions.current.playing = !playerOptions.current.playing)
+  }, [])
+
   let t = 0
   useFrame((state, delta) => {
     t += delta
@@ -50,12 +115,13 @@ const Logo = () => {
     logo.current.rotation.z = Math.sin(t) * 0.02 - 0.35 + mesh.rotation[2]
   })
   return (
-    <group
+    <animated.group
       ref={logo}
       scale={mesh.scale}
       rotation={mesh.rotation}
       position={mesh.position}
-      onClick={() => router.push('https://soundcloud.com/rozarbeats')}
+      onClick={() => play()}
+      // onClick={() => router.push('https://soundcloud.com/rozarbeats')}
     >
       <spotLight
         ref={spotLight1}
@@ -96,7 +162,7 @@ const Logo = () => {
         material={materials['Material.001']}
         geometry={nodes.path553.geometry}
       />
-    </group>
+    </animated.group>
   )
 }
 export default RozarComponent
