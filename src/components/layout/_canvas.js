@@ -1,7 +1,12 @@
 import { Canvas, useFrame, useThree } from 'react-three-fiber'
 import { Perf } from 'r3f-perf'
 import useStore from '@/helpers/store'
-import { Environment, Preload, useProgress } from '@react-three/drei'
+import {
+  Environment,
+  FlyControls,
+  Preload,
+  useProgress,
+} from '@react-three/drei'
 import { animated, useSpring, config } from '@react-spring/three'
 import {
   Bloom,
@@ -33,36 +38,38 @@ const Bg = () => {
 }
 const LCanvas = ({ children }) => {
   return (
-    <Canvas
-      style={{
-        position: 'absolute',
-        top: 0,
-      }}
-      gl={{
-        powerPreference: 'high-performance',
-        alpha: false,
-        antialias: false,
-        stencil: false,
-        depth: false,
-      }}
-      pixelRatio={[1, 2]}
-      onCreated={({ events }) => {
-        useStore.setState({ events })
-      }}
-    >
+    <>
+      <Canvas
+        style={{
+          position: 'absolute',
+          top: 0,
+        }}
+        gl={{
+          powerPreference: 'high-performance',
+          alpha: false,
+          antialias: false,
+          stencil: false,
+          depth: false,
+        }}
+        pixelRatio={[1, 2]}
+        onCreated={({ events }) => {
+          useStore.setState({ events })
+        }}
+      >
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.6} />
+          <Environment preset={'studio'} />
+          <Rainfall />
+        </Suspense>
+        {/* <FlyControls rollSpeed={0.1} /> */}
+        <SelectionControls />
+        <Preload all />
+        <Bg />
+        <Perf trackGPU={true} position={'bottom-right'} />
+        {children}
+      </Canvas>
       <Leva hidden={true} />
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.6} />
-        <Environment preset={'studio'} />
-        <Rainfall />
-      </Suspense>
-      {/* <FlyControls rollSpeed={0.1} /> */}
-      <SelectionControls />
-      <Preload all />
-      <Bg />
-      <Perf trackGPU={true} position={'bottom-right'} />
-      {children}
-    </Canvas>
+    </>
   )
 }
 
