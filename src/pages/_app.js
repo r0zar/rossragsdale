@@ -5,7 +5,6 @@ import Header from '../config'
 import dynamic from 'next/dynamic'
 import Dom from '@/components/layout/_dom'
 import '@/styles/index.css'
-import Script from 'next/script'
 
 let LCanvas = null
 if (process.env.NODE_ENV === 'production') {
@@ -22,11 +21,6 @@ function SplitApp({ canvas, dom }) {
       <Header />
       {dom && <Dom dom={dom} />}
       <LCanvas>{canvas && <group>{canvas}</group>}</LCanvas>
-      <Script
-        async
-        src='https://tag.clearbitscripts.com/v1/pk_70fd662a3f4bdc78e362dc0d76f1e234/tags.js'
-        referrerpolicy='strict-origin-when-cross-origin'
-      />
     </>
   )
 }
@@ -48,10 +42,19 @@ function MyApp({ Component, pageProps }) {
     useStore.setState({ router })
   }, [router])
 
-  return r3fArr.length > 0 ? (
-    <SplitApp canvas={r3fArr} dom={compArr} {...pageProps} />
-  ) : (
-    <Component {...pageProps} />
+  return (
+    <>
+      {r3fArr.length > 0 ? (
+        <SplitApp canvas={r3fArr} dom={compArr} {...pageProps} />
+      ) : (
+        <Component {...pageProps} />
+      )}
+      <script
+        async
+        src='https://tag.clearbitscripts.com/v1/pk_70fd662a3f4bdc78e362dc0d76f1e234/tags.js'
+        referrerpolicy='strict-origin-when-cross-origin'
+      />
+    </>
   )
 }
 
