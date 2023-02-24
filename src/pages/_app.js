@@ -54,6 +54,12 @@ function MyApp({ Component, pageProps }) {
         src='https://tag.clearbitscripts.com/v1/pk_70fd662a3f4bdc78e362dc0d76f1e234/tags.js'
         referrerpolicy='strict-origin-when-cross-origin'
       />
+      <head>
+        <meta
+          name='facebook-domain-verification'
+          content='kjdeebndtr5va70hvr1ixydlc198d6'
+        />
+      </head>
     </>
   )
 }
